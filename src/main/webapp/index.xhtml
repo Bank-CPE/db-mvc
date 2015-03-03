@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Primefaces</title>
+        <link rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/static/css/style.css"/>
+    </h:head>
+    <h:body>
+        <p:growl id="notification"
+                 showDetail="true"
+                 showSummary="true"/>
+        <h:form id="employeeForm">
+            
+            <h1>Employee</h1>
+            <p:inputText id="query"/>
+            <p:watermark for="query" value="search..."/>
+            
+            <p:selectOneMenu>
+                <f:selectItem itemValue="name" itemLabel="name"/>
+                <f:selectItem itemValue="email" itemLabel="email"/>
+                <f:selectItem itemValue="phone" itemLabel="phone"/>
+                <f:selectItem itemValue="salary" itemLabel="salary"/>
+            </p:selectOneMenu>
+             <p:commandButton value="search"
+                             styleClass="green-button"
+                             actionListener="#{employeeCtrl.onSearch()}"
+                             update="@form"/>
+            <p:commandButton value="clear"
+                             styleClass="white-button"
+                             actionListener="#{employeeCtrl.onClear()}"
+                             update="@form"/>
+            
+            <p:dataTable value="#{employeeCtrl.employees}"
+                         rowIndexVar="counter"
+                         var="item">
+                <p:column headerText="NO." style="width: 5%">
+                    #{counter+1}
+                </p:column>
+                <p:column headerText="Employee ID">
+                    #{item.id}
+                </p:column>
+                <p:column headerText="First Name">
+                    #{item.firstName}
+                </p:column>
+                <p:column headerText="Last Name">
+                    #{item.lastName}
+                </p:column>
+                <p:column headerText="Email">
+                    #{item.email}
+                </p:column>
+                <p:column headerText="Phone Number">
+                    #{item.phoneNumber}
+                </p:column>
+                <p:column headerText="Salary">
+                    #{item.salary}
+                </p:column>
+                <p:column headerText="#">
+                    <p:commandLink value="show"
+                                   
+                                   oncomplete="PF('showWidgetDialog').show()"
+                                   actionListener="#{employeeCtrl.onSelect()}">
+                        <f:param name="employeeId" value="#{item.id}"/>
+                    </p:commandLink>
+                </p:column>
+                
+            </p:dataTable>
+            
+        </h:form>
+    </h:body>
+</html>

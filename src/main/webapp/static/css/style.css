@@ -1,0 +1,48 @@
+
+*{
+    font-family: Arial, Helvetica, Sans-serif, Geneva, Tahoma;
+    color: #444;
+}
+
+body,div,span{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+body{
+    padding: 20px;
+}
+
+h1{
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+html {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.ui-selectonemenu {
+    position: relative;
+    top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.ui-selectonemenu {
+    display: inline-block;
+    position: relative;
+    width: auto;
+    zoom: 1;
+    cursor: pointer;
+}
+
+.ui-selectonemenu, .ui-selectonemenu:hover {
+    border-color: #e2e2e2 #e2e2e2 #CDCDCD #e2e2e2;
+}
