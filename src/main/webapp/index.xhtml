@@ -182,8 +182,7 @@ and open the template in the editor.
                   resizable="false"
                   widgetVar="insertWidgetDialog">
             <h:form id="insertDialogForm">
-                <h:panelGrid columns="2">
-                    Employee ID : <p:inputText id="employee_id"/>
+                <h:panelGrid columns="2">                   
                     First Name : <p:inputText /> 
                     Last Name : <p:inputText id="last_name"/>
                     Email : <p:inputText id="email"/>
@@ -200,6 +199,12 @@ and open the template in the editor.
                     <p:watermark for="hire_date" value="Not Null"/>
                     <p:watermark for="job_id" value="Not Null"/>
                 </h:panelGrid>
+                <p:commandButton value="insert"
+                                 oncomplete="PF('insertWidgetDialog').hide()"
+                                 actionListener="#{employeeCtrl.onInsert()}"/>
+                <p:commandButton value="cancel"
+                                 type="button"
+                                 onclick="PF('insertWidgetDialog').hide()"/>
             </h:form>
         </p:dialog>
     </h:body>

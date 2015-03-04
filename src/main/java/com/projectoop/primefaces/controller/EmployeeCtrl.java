@@ -55,6 +55,10 @@ public class EmployeeCtrl implements Serializable{
         return employees;
     }
     
+    public void onInsert(){
+        System.out.println("first_name : " + employee.getFirstName());
+    }
+    
     public void onDelete() {
         System.out.println("delelte id = " + employee.getId());
         notifyMessage();
