@@ -74,7 +74,7 @@ and open the template in the editor.
                     </p:commandLink>
                     <p:spacer width="5"/>
                     <p:commandLink value="update"
-
+                                   update=":updateDialogForm"
                                    oncomplete="PF('updateWidgetDialog').show()"
                                    actionListener="#{employeeCtrl.onSelect()}">
                         <f:param name="employeeId" value="#{item.id}"/>
@@ -160,18 +160,18 @@ and open the template in the editor.
                   resizable="false"
                   widgetVar="updateWidgetDialog">
             <h:form id="updateDialogForm">
-                <h:panelGrid columns="2">
-                    Employee ID : <p:inputText/>
-                    First Name : <p:inputText />
-                    Last Name : <p:inputText />
-                    Email : <p:inputText />
-                    Phone Number : <p:inputText />
-                    Hire Date : <p:inputText />
-                    Job ID : <p:inputText/>
-                    Salary : <p:inputText />
-                    Commission PCT : <p:inputText />
-                    Manager ID : <p:inputText />
-                    Department ID : <p:inputText />
+                <h:panelGrid columns="3">
+                    Employee ID : <h:outputText value="#{employeeCtrl.employee.id}"/> <p:inputText/>
+                    First Name : <h:outputText value="#{employeeCtrl.employee.firstName}"/> <p:inputText />
+                    Last Name : <h:outputText value="#{employeeCtrl.employee.lastName}"/> <p:inputText />
+                    Email : <h:outputText value="#{employeeCtrl.employee.email}"/> <p:inputText />
+                    Phone Number : <h:outputText value="#{employeeCtrl.employee.phoneNumber}"/> <p:inputText />
+                    Hire Date : <h:outputText value="#{employeeCtrl.employee.hireDate}"/> <p:inputText />
+                    Job ID : <h:outputText value="#{employeeCtrl.employee.jobId}"/> <p:inputText/>
+                    Salary : <h:outputText value="#{employeeCtrl.employee.salary}"/> <p:inputText />
+                    Commission PCT : <h:outputText value="#{employeeCtrl.employee.commissionPct}"/> <p:inputText />
+                    Manager ID : <h:outputText value="#{employeeCtrl.employee.managerId}"/> <p:inputText />
+                    Department ID : <h:outputText value="#{employeeCtrl.employee.departmentId}"/> <p:inputText />
                 </h:panelGrid>
             </h:form>
         </p:dialog>
