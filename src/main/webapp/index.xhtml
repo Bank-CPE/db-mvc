@@ -18,19 +18,19 @@ and open the template in the editor.
         <p:growl id="notification"
                  showDetail="true"
                  showSummary="true"/>
-        <h:form id="employeeForm">
-            
-            <h1>Employee</h1>
-            <p:inputText id="query"/>
+
+        <h1>Employees</h1>
+        <h:form id="employeesForm">
+            <p:inputText id="query" value="#{employeeCtrl.query}"/>
             <p:watermark for="query" value="search..."/>
-            
-            <p:selectOneMenu>
-                <f:selectItem itemValue="name" itemLabel="name"/>
-                <f:selectItem itemValue="email" itemLabel="email"/>
-                <f:selectItem itemValue="phone" itemLabel="phone"/>
-                <f:selectItem itemValue="salary" itemLabel="salary"/>
+
+            <p:selectOneMenu value="#{employeeCtrl.searchBy}">
+                <f:selectItem itemValue="name" itemLabel="Name"/>
+                <f:selectItem itemValue="email" itemLabel="Email"/>
+                <f:selectItem itemValue="phone" itemLabel="Phone"/>
+                <f:selectItem itemValue="salary" itemLabel="Salary"/>
             </p:selectOneMenu>
-             <p:commandButton value="search"
+            <p:commandButton value="search"
                              styleClass="green-button"
                              actionListener="#{employeeCtrl.onSearch()}"
                              update="@form"/>
@@ -38,12 +38,14 @@ and open the template in the editor.
                              styleClass="white-button"
                              actionListener="#{employeeCtrl.onClear()}"
                              update="@form"/>
+            <p:commandButton value="insert"
+                             onclick="PF('insertWidgetDialog').show()"/>
             
             <p:dataTable value="#{employeeCtrl.employees}"
                          rowIndexVar="counter"
                          var="item">
                 <p:column headerText="NO." style="width: 5%">
-                    #{counter+1}
+                    #{counter + 1}
                 </p:column>
                 <p:column headerText="Employee ID">
                     #{item.id}
@@ -65,15 +67,140 @@ and open the template in the editor.
                 </p:column>
                 <p:column headerText="#">
                     <p:commandLink value="show"
-                                   
+                                   update=":showDialogPanel"
                                    oncomplete="PF('showWidgetDialog').show()"
                                    actionListener="#{employeeCtrl.onSelect()}">
                         <f:param name="employeeId" value="#{item.id}"/>
                     </p:commandLink>
+                    <p:spacer width="5"/>
+                    <p:commandLink value="update"
+
+                                   oncomplete="PF('updateWidgetDialog').show()"
+                                   actionListener="#{employeeCtrl.onSelect()}">
+                        <f:param name="employeeId" value="#{item.id}"/>
+                    </p:commandLink>
+                    <p:spacer width="5" />
+                    <p:commandLink value="delete"
+                                   update=":deleteDialogForm"
+                                   oncomplete="PF('deleteWidgetDialog').show()"
+                                   actionListener="#{employeeCtrl.onSelect()}">
+                        <f:param name="employeeId" value="#{item.id}"/>
+                    </p:commandLink>
                 </p:column>
-                
             </p:dataTable>
-            
         </h:form>
+
+        <p:dialog id="showDialog"
+                  width="500"
+                  header="Show Employee Details"
+                  resizable="false"
+                  widgetVar="showWidgetDialog">
+            <p:outputPanel id="showDialogPanel">
+                <h:panelGrid columns="2">
+                    <h:outputText value="Employee ID"/>
+                    <h:outputText value="#{employeeCtrl.employee.id}"/>
+
+                    <h:outputText value="First Name"/>
+                    <h:outputText value="#{employeeCtrl.employee.firstName}"/>
+
+                    <h:outputText value="Last Name"/>
+                    <h:outputText value="#{employeeCtrl.employee.lastName}"/>
+
+                    <h:outputText value="Email"/>
+                    <h:outputText value="#{employeeCtrl.employee.email}"/>
+
+                    <h:outputText value="Phone Number"/>
+                    <h:outputText value="#{employeeCtrl.employee.phoneNumber}"/>
+
+                    <h:outputText value="Hire Date"/>
+                    <h:outputText value="#{employeeCtrl.employee.hireDate}"/>
+                    
+                    <h:outputText value="Job ID"/>
+                    <h:outputText value="#{employeeCtrl.employee.jobId}"/>
+                    
+                    <h:outputText value="Salary"/>
+                    <h:outputText value="#{employeeCtrl.employee.salary}"/>
+                    
+                    <h:outputText value="Commission PCT"/>
+                    <h:outputText value="#{employeeCtrl.employee.commissionPct}"/>
+                    
+                    <h:outputText value="Manager ID"/>
+                    <h:outputText value="#{employeeCtrl.employee.managerId}"/>
+                    
+                    <h:outputText value="Department ID"/>
+                    <h:outputText value="#{employeeCtrl.employee.departmentId}"/>
+                </h:panelGrid>
+            </p:outputPanel>
+        </p:dialog>
+
+        <p:dialog id="deleteDialog"
+                  width="500"
+                  header="Delete Employee"
+                  resizable="false"
+                  widgetVar="deleteWidgetDialog">
+            <h:form id="deleteDialogForm"> 
+                #{employeeCtrl.employee.firstName} #{employeeCtrl.employee.lastName}
+                <br/>
+                <br/>
+                <p:commandButton value="delete"
+                                 update=":notification, :employeesForm"
+                                 actionListener="#{employeeCtrl.onDelete()}"
+                                 oncomplete="PF('deleteWidgetDialog').hide()"
+                                 styleClass="red-button"/>
+                <p:commandButton value="cancel"
+                                 type="button"
+                                 onclick="PF('deleteWidgetDialog').hide()"
+                                 styleClass="white-button"/>
+            </h:form>
+        </p:dialog>
+
+        <p:dialog id="updateDialog"
+                  width="500"
+                  header="Update Employee"
+                  resizable="false"
+                  widgetVar="updateWidgetDialog">
+            <h:form id="updateDialogForm">
+                <h:panelGrid columns="2">
+                    Employee ID : <p:inputText/>
+                    First Name : <p:inputText />
+                    Last Name : <p:inputText />
+                    Email : <p:inputText />
+                    Phone Number : <p:inputText />
+                    Hire Date : <p:inputText />
+                    Job ID : <p:inputText/>
+                    Salary : <p:inputText />
+                    Commission PCT : <p:inputText />
+                    Manager ID : <p:inputText />
+                    Department ID : <p:inputText />
+                </h:panelGrid>
+            </h:form>
+        </p:dialog>
+        
+        <p:dialog id="insertDialog"
+                  width="500"
+                  header="Insert Employee"
+                  resizable="false"
+                  widgetVar="insertWidgetDialog">
+            <h:form id="insertDialogForm">
+                <h:panelGrid columns="2">
+                    Employee ID : <p:inputText id="employee_id"/>
+                    First Name : <p:inputText /> 
+                    Last Name : <p:inputText id="last_name"/>
+                    Email : <p:inputText id="email"/>
+                    Phone Number : <p:inputText />
+                    Hire Date : <p:inputText id="hire_date"/>
+                    Job ID : <p:inputText id="job_id"/>
+                    Salary : <p:inputText />
+                    Commission PCT : <p:inputText />
+                    Manager ID : <p:inputText />
+                    Department ID : <p:inputText />
+                    <p:watermark for="employee_id" value="Not Null"/>
+                    <p:watermark for="last_name" value="Not Null"/>
+                    <p:watermark for="email" value="Not Null"/>
+                    <p:watermark for="hire_date" value="Not Null"/>
+                    <p:watermark for="job_id" value="Not Null"/>
+                </h:panelGrid>
+            </h:form>
+        </p:dialog>
     </h:body>
 </html>
