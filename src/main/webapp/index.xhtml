@@ -200,7 +200,7 @@ and open the template in the editor.
                     <p:watermark for="email" value="Not Null"/>
                     <p:watermark for="job_id" value="Not Null"/>
                 </h:panelGrid>
-                <p:commandButton value="insert"
+                <p:commandButton value="insert"  
                                  update=":notification, :employeesForm"
                                  oncomplete="PF('insertWidgetDialog').hide()"
                                  actionListener="#{employeeCtrl.onInsert()}"/>

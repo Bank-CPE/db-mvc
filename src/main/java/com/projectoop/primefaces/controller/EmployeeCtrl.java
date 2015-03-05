@@ -73,6 +73,9 @@ public class EmployeeCtrl implements Serializable{
         emp.setDepartmentId(employee.getDepartmentId());
         
         IntoRow(emp);
+        emp = null;
+        
+                
         
     }
     
@@ -85,8 +88,9 @@ public class EmployeeCtrl implements Serializable{
     
     public void onDelete() throws ClassNotFoundException, SQLException {
 //        System.out.println("delelte id = " + employee.getId());
-        notifyMessage();
+        notifyMessageDelete();
         DeleteRow(employee);
+        onSearch();
     }
     
     public void DeleteRow(Employee e) throws ClassNotFoundException, SQLException{
@@ -110,7 +114,7 @@ public class EmployeeCtrl implements Serializable{
         this.searchBy = searchBy;
     }
     
-    public void notifyMessage() {
+    public void notifyMessageDelete() {
         FacesContext.getCurrentInstance()
                 .addMessage(null, new FacesMessage(
                                 FacesMessage.SEVERITY_INFO,
