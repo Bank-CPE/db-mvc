@@ -183,22 +183,21 @@ and open the template in the editor.
                   widgetVar="insertWidgetDialog">
             <h:form id="insertDialogForm">
                 <h:panelGrid columns="2">                   
-                    First Name : <p:inputText /> 
-                    Last Name : <p:inputText id="last_name"/>
-                    Email : <p:inputText id="email"/>
-                    Phone Number : <p:inputText />
-                    Hire Date : <p:inputText id="hire_date"/>
-                    Job ID : <p:inputText id="job_id"/>
-                    Salary : <p:inputText />
-                    Commission PCT : <p:inputText />
-                    Manager ID : <p:inputText />
-                    Department ID : <p:inputText />             
+                    First Name : <p:inputText value="#{employeeCtrl.employee.firstName}"/> 
+                    Last Name : <p:inputText id="last_name" value="#{employeeCtrl.employee.lastName}"/>
+                    Email : <p:inputText id="email" value="#{employeeCtrl.employee.email}"/>
+                    Phone Number : <p:inputText value="#{employeeCtrl.employee.phoneNumber}"/> 
+                    Job ID : <p:inputText id="job_id" value="#{employeeCtrl.employee.jobId}"/>
+                    Salary : <p:inputText value="#{employeeCtrl.employee.salary}"/>
+                    Commission PCT : <p:inputText value="#{employeeCtrl.employee.commissionPct}"/>
+                    Manager ID : <p:inputText value="#{employeeCtrl.employee.managerId}"/>
+                    Department ID : <p:inputText value="#{employeeCtrl.employee.departmentId}"/>             
                     <p:watermark for="last_name" value="Not Null"/>
                     <p:watermark for="email" value="Not Null"/>
-                    <p:watermark for="hire_date" value="Not Null"/>
                     <p:watermark for="job_id" value="Not Null"/>
                 </h:panelGrid>
                 <p:commandButton value="insert"
+                                 update=":notification, :employeesForm"
                                  oncomplete="PF('insertWidgetDialog').hide()"
                                  actionListener="#{employeeCtrl.onInsert()}"/>
                 <p:commandButton value="cancel"

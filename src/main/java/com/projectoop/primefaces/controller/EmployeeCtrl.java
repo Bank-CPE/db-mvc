@@ -6,9 +6,12 @@
 package com.projectoop.primefaces.controller;
 
 import com.projectoop.primefaces.model.Employee;
+import com.projectoop.primefaces.service.DeleteService;
 import com.projectoop.primefaces.service.EmployeeSearchService;
+import com.projectoop.primefaces.service.InsertService;
 import com.projectoop.primefaces.service.SearchServiceUtils;
 import java.io.Serializable;
+import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -55,13 +58,39 @@ public class EmployeeCtrl implements Serializable{
         return employees;
     }
     
-    public void onInsert(){
-        System.out.println("first_name : " + employee.getFirstName());
+    public void onInsert() throws ClassNotFoundException, SQLException{
+        Employee emp = new Employee();
+        emp.setId(employees.get(employees.size()-1).getId());
+        emp.setFirstName(employee.getFirstName());
+        emp.setLastName(employee.getLastName());
+        emp.setEmail(employee.getEmail());
+        emp.setPhoneNumber(employee.getPhoneNumber());
+        emp.setJobId(employee.getJobId().toUpperCase());
+        emp.setSalary(employee.getSalary());
+        emp.setCommissionPct(employee.getCommissionPct());
+        emp.setManagerId(employee.getManagerId());
+        emp.setDepartmentId(employee.getDepartmentId());
+        
+        IntoRow(emp);
+        
     }
     
-    public void onDelete() {
-        System.out.println("delelte id = " + employee.getId());
+    public void IntoRow(Employee e) throws ClassNotFoundException, SQLException{
+        InsertService service = new InsertService();
+        service.insertRow(e);
+    }
+    
+    
+    
+    public void onDelete() throws ClassNotFoundException, SQLException {
+//        System.out.println("delelte id = " + employee.getId());
         notifyMessage();
+        DeleteRow(employee);
+    }
+    
+    public void DeleteRow(Employee e) throws ClassNotFoundException, SQLException{
+        DeleteService service = new DeleteService();
+        service.deleteRow(e);
     }
     
     public String getQuery() {
