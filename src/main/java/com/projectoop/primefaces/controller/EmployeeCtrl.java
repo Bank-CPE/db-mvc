@@ -10,6 +10,7 @@ import com.projectoop.primefaces.service.DeleteService;
 import com.projectoop.primefaces.service.EmployeeSearchService;
 import com.projectoop.primefaces.service.InsertService;
 import com.projectoop.primefaces.service.SearchServiceUtils;
+import com.projectoop.primefaces.service.UpdateService;
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.LinkedList;
@@ -63,7 +64,7 @@ public class EmployeeCtrl implements Serializable{
         emp.setId(employees.get(employees.size()-1).getId());
         emp.setFirstName(employee.getFirstName());
         emp.setLastName(employee.getLastName());
-        emp.setEmail(employee.getEmail());
+        emp.setEmail(employee.getEmail().toUpperCase());
         emp.setPhoneNumber(employee.getPhoneNumber());
         emp.setJobId(employee.getJobId().toUpperCase());
         emp.setSalary(employee.getSalary());
@@ -140,5 +141,14 @@ public class EmployeeCtrl implements Serializable{
         }
 
         return employee;
+    }
+    
+    public void onUpdate() throws SQLException{
+        updateRow(employee);
+    }
+    
+    public void updateRow(Employee e) throws SQLException{
+        UpdateService service  = new UpdateService();
+        service.updateRow(e);
     }
 }

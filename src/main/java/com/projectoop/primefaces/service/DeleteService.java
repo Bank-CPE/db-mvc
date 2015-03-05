@@ -34,7 +34,7 @@ public class DeleteService {
         Class.forName(DBConfig.getDriver());
         
         Connection connection = null;
-        Statement statement = null;
+       
         
         try{
             

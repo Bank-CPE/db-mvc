@@ -40,7 +40,7 @@ and open the template in the editor.
                              update="@form"/>
             <p:commandButton value="insert"
                              onclick="PF('insertWidgetDialog').show()"/>
-            
+
             <p:dataTable value="#{employeeCtrl.employees}"
                          rowIndexVar="counter"
                          var="item">
@@ -75,7 +75,7 @@ and open the template in the editor.
                     <p:spacer width="5"/>
                     <p:commandLink value="update"
                                    update=":updateDialogForm"
-                                   oncomplete="PF('updateWidgetDialog').show()"
+                                   onclick="PF('updateWidgetDialog').show()"
                                    actionListener="#{employeeCtrl.onSelect()}">
                         <f:param name="employeeId" value="#{item.id}"/>
                     </p:commandLink>
@@ -114,19 +114,19 @@ and open the template in the editor.
 
                     <h:outputText value="Hire Date"/>
                     <h:outputText value="#{employeeCtrl.employee.hireDate}"/>
-                    
+
                     <h:outputText value="Job ID"/>
                     <h:outputText value="#{employeeCtrl.employee.jobId}"/>
-                    
+
                     <h:outputText value="Salary"/>
                     <h:outputText value="#{employeeCtrl.employee.salary}"/>
-                    
+
                     <h:outputText value="Commission PCT"/>
                     <h:outputText value="#{employeeCtrl.employee.commissionPct}"/>
-                    
+
                     <h:outputText value="Manager ID"/>
                     <h:outputText value="#{employeeCtrl.employee.managerId}"/>
-                    
+
                     <h:outputText value="Department ID"/>
                     <h:outputText value="#{employeeCtrl.employee.departmentId}"/>
                 </h:panelGrid>
@@ -155,27 +155,31 @@ and open the template in the editor.
         </p:dialog>
 
         <p:dialog id="updateDialog"
-                  width="600"
+                  width="500"
                   header="Update Employee"
                   resizable="false"
                   widgetVar="updateWidgetDialog">
             <h:form id="updateDialogForm">
-                <h:panelGrid columns="3">
-                    Employee ID : <h:outputText value="#{employeeCtrl.employee.id}"/> <p:inputText/>
-                    First Name : <h:outputText value="#{employeeCtrl.employee.firstName}"/> <p:inputText />
-                    Last Name : <h:outputText value="#{employeeCtrl.employee.lastName}"/> <p:inputText />
-                    Email : <h:outputText value="#{employeeCtrl.employee.email}"/> <p:inputText />
-                    Phone Number : <h:outputText value="#{employeeCtrl.employee.phoneNumber}"/> <p:inputText />
-                    Hire Date : <h:outputText value="#{employeeCtrl.employee.hireDate}"/> <p:inputText />
-                    Job ID : <h:outputText value="#{employeeCtrl.employee.jobId}"/> <p:inputText/>
-                    Salary : <h:outputText value="#{employeeCtrl.employee.salary}"/> <p:inputText />
-                    Commission PCT : <h:outputText value="#{employeeCtrl.employee.commissionPct}"/> <p:inputText />
-                    Manager ID : <h:outputText value="#{employeeCtrl.employee.managerId}"/> <p:inputText />
-                    Department ID : <h:outputText value="#{employeeCtrl.employee.departmentId}"/> <p:inputText />
+                <h:panelGrid columns="2">
+                    First Name : <p:inputText value="#{employeeCtrl.employee.firstName}"/>
+                    Last Name : <p:inputText value="#{employeeCtrl.employee.lastName}"/>
+                    Email : <p:inputText value="#{employeeCtrl.employee.email}"/>
+                    Phone Number : <p:inputText value="#{employeeCtrl.employee.phoneNumber}"/>
+                    Salary : <p:inputText value="#{employeeCtrl.employee.salary}"/>
+                    Commission PCT : <p:inputText value="#{employeeCtrl.employee.commissionPct}"/>
+                    Manager ID : <p:inputText value="#{employeeCtrl.employee.managerId}"/>
+                   
                 </h:panelGrid>
+                <p:commandButton value="update"
+                                 update=":notification, :employeesForm"
+                                 oncomplete="PF('updateWidgetDialog').hide()"
+                                 actionListener="#{employeeCtrl.onUpdate()}"/>
+                <p:commandButton value="cancel"
+                                 type="button"
+                                 onclick="PF('insertWidgetDialog').hide()"/>         
             </h:form>
         </p:dialog>
-        
+
         <p:dialog id="insertDialog"
                   width="500"
                   header="Insert Employee"
@@ -206,4 +210,4 @@ and open the template in the editor.
             </h:form>
         </p:dialog>
     </h:body>
-</html>
+</html>  
