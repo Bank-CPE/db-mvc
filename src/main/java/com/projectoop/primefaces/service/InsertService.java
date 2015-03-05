@@ -52,8 +52,8 @@ public class InsertService {
             connection = getConnection();
 
             String sql = "INSERT INTO Employees"
-                    + "(employee_id,first_name,last_name,email,phone_number,hire_date,job_id,salary,commission_pct,manager_id,department_id)"
-                    + "VALUES(?,?,?,?,?,SYSDATE,?,?,?,?,?)";
+                    + "(employee_id,first_name,last_name,email,phone_number,hire_date,job_id,salary,manager_id,department_id)"
+                    + "VALUES(?,?,?,?,?,SYSDATE,?,?,?,?)";
 
             PreparedStatement prep = connection.prepareStatement(sql);
             prep.setInt(1, employee.getId());
@@ -63,9 +63,8 @@ public class InsertService {
             prep.setString(5, employee.getPhoneNumber());
             prep.setString(6, employee.getJobId());
             prep.setDouble(7, employee.getSalary());
-            prep.setFloat(8, employee.getCommissionPct());
-            prep.setInt(9, employee.getManagerId());
-            prep.setInt(10, employee.getDepartmentId());
+            prep.setInt(8, employee.getManagerId());
+            prep.setInt(9, employee.getDepartmentId());
             prep.executeUpdate();
 
             System.out.println("Record Inserted Successfully");

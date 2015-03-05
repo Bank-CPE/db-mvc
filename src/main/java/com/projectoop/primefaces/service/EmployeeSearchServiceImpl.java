@@ -21,7 +21,7 @@ public class EmployeeSearchServiceImpl implements EmployeeSearchService {
     public List<Employee> search(String keyword) {
         keyword = SqlUtils.wrapKeywordLike(keyword);
         
-        return QueryBuilder.fromSQL("SELECT * FROM Employees")
+        return QueryBuilder.fromSQL("SELECT * FROM Employees ORDER BY 1")
                 .executeforList(Employee.class);
     }
 

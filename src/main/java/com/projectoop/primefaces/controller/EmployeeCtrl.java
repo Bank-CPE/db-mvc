@@ -27,19 +27,18 @@ import javax.faces.context.FacesContext;
  */
 @ManagedBean
 @ViewScoped
-public class EmployeeCtrl implements Serializable{
-    
+public class EmployeeCtrl implements Serializable {
+
     private List<Employee> employees;
     private String query;
     private String searchBy;
     private Employee employee;
-    
-    
+
     @PostConstruct
     public void postConstruct() {
         onSearch();
     }
-    
+
     public void onSearch() {
         EmployeeSearchService service = SearchServiceUtils.findServiceByName(searchBy);
         employees = service.search(query);
@@ -50,7 +49,7 @@ public class EmployeeCtrl implements Serializable{
         searchBy = null;
         onSearch();
     }
-    
+
     public List<Employee> getEmployees() {
         if (employees == null) {
             employees = new LinkedList<>();
@@ -58,10 +57,10 @@ public class EmployeeCtrl implements Serializable{
 
         return employees;
     }
-    
-    public void onInsert() throws ClassNotFoundException, SQLException{
+
+    public void onInsert() throws ClassNotFoundException, SQLException {
         Employee emp = new Employee();
-        emp.setId(employees.get(employees.size()-1).getId());
+        emp.setId(employees.get(employees.size() - 1).getId());
         emp.setFirstName(employee.getFirstName());
         emp.setLastName(employee.getLastName());
         emp.setEmail(employee.getEmail().toUpperCase());
@@ -71,33 +70,32 @@ public class EmployeeCtrl implements Serializable{
         emp.setCommissionPct(employee.getCommissionPct());
         emp.setManagerId(employee.getManagerId());
         emp.setDepartmentId(employee.getDepartmentId());
-        
+
         IntoRow(emp);
-        emp = null;
-        
-                
-        
+        notifyMessageInsert(emp);
+        onClear();
+        onSearch();
+
     }
-    
-    public void IntoRow(Employee e) throws ClassNotFoundException, SQLException{
+
+    public void IntoRow(Employee e) throws ClassNotFoundException, SQLException {
         InsertService service = new InsertService();
         service.insertRow(e);
     }
-    
-    
-    
+
     public void onDelete() throws ClassNotFoundException, SQLException {
-//        System.out.println("delelte id = " + employee.getId());
         notifyMessageDelete();
         DeleteRow(employee);
+        onClear();
         onSearch();
+
     }
-    
-    public void DeleteRow(Employee e) throws ClassNotFoundException, SQLException{
+
+    public void DeleteRow(Employee e) throws ClassNotFoundException, SQLException {
         DeleteService service = new DeleteService();
         service.deleteRow(e);
     }
-    
+
     public String getQuery() {
         return query;
     }
@@ -113,7 +111,7 @@ public class EmployeeCtrl implements Serializable{
     public void setSearchBy(String searchBy) {
         this.searchBy = searchBy;
     }
-    
+
     public void notifyMessageDelete() {
         FacesContext.getCurrentInstance()
                 .addMessage(null, new FacesMessage(
@@ -121,9 +119,17 @@ public class EmployeeCtrl implements Serializable{
                                 "Delete Employee",
                                 "success (id " + employee.getId() + ")"
                         ));
-
     }
-    
+
+    public void notifyMessageInsert(Employee e) {
+        FacesContext.getCurrentInstance()
+                .addMessage(null, new FacesMessage(
+                                FacesMessage.SEVERITY_INFO,
+                                "Insert Employee",
+                                "success (id " + e.getId() + ")"
+                        ));
+    }
+
     private Object request(String param) {
         return FacesContext.getCurrentInstance()
                 .getExternalContext()
@@ -138,7 +144,7 @@ public class EmployeeCtrl implements Serializable{
         int index = getEmployees().indexOf(emp);
         employee = getEmployees().get(index);
     }
-    
+
     public Employee getEmployee() {
         if (employee == null) {
             employee = new Employee();
@@ -146,13 +152,13 @@ public class EmployeeCtrl implements Serializable{
 
         return employee;
     }
-    
-    public void onUpdate() throws SQLException{
+
+    public void onUpdate() throws SQLException {
         updateRow(employee);
     }
-    
-    public void updateRow(Employee e) throws SQLException{
-        UpdateService service  = new UpdateService();
+
+    public void updateRow(Employee e) throws SQLException {
+        UpdateService service = new UpdateService();
         service.updateRow(e);
     }
 }
