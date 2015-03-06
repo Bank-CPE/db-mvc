@@ -39,8 +39,10 @@ and open the template in the editor.
                              actionListener="#{employeeCtrl.onClear()}"
                              update="@form"/>
             <p:commandButton value="insert"
-                             onclick="PF('insertWidgetDialog').show()"/>
-
+                             styleClass="blue-button"
+                             onclick="PF('insertWidgetDialog').show()"
+                             update="@form"/>
+                             
             <p:dataTable value="#{employeeCtrl.employees}"
                          rowIndexVar="counter"
                          var="item">
@@ -65,7 +67,8 @@ and open the template in the editor.
                 <p:column headerText="Salary">
                     $#{item.salary}
                 </p:column>
-                <p:column headerText="#">
+                <p:column headerText="Details">
+                    <p:spacer width="10"/>
                     <p:commandLink value="show"
                                    update=":showDialogPanel"
                                    oncomplete="PF('showWidgetDialog').show()"
@@ -130,6 +133,8 @@ and open the template in the editor.
                     <h:outputText value="Department ID"/>
                     <h:outputText value="#{employeeCtrl.employee.departmentId}"/>
                 </h:panelGrid>
+                <br/>
+                <br/>
             </p:outputPanel>
         </p:dialog>
 
@@ -139,7 +144,7 @@ and open the template in the editor.
                   resizable="false"
                   widgetVar="deleteWidgetDialog">
             <h:form id="deleteDialogForm"> 
-                Employee ID <p:spacer width="1"/> : <p:spacer width="5"/> #{employeeCtrl.employee.id}
+                Employee ID <p:spacer width="4"/> : <p:spacer width="5"/> #{employeeCtrl.employee.id}
                 <br/>
                 First Name <p:spacer width="16"/> : <p:spacer width="5"/>#{employeeCtrl.employee.firstName}
                 <br/>
@@ -174,13 +179,17 @@ and open the template in the editor.
                     Manager ID : <p:inputText value="#{employeeCtrl.employee.managerId}"/>
                    
                 </h:panelGrid>
+                <br/>
+                <br/>
                 <p:commandButton value="update"
                                  update=":notification, :employeesForm"
                                  oncomplete="PF('updateWidgetDialog').hide()"
-                                 actionListener="#{employeeCtrl.onUpdate()}"/>
+                                 actionListener="#{employeeCtrl.onUpdate()}"
+                                 styleClass="blue-buuton"/>
                 <p:commandButton value="cancel"
                                  type="button"
-                                 onclick="PF('insertWidgetDialog').hide()"/>         
+                                 onclick="PF('insertWidgetDialog').hide()"
+                                 styleClass="white-button"/>         
             </h:form>
         </p:dialog>
 
@@ -203,6 +212,8 @@ and open the template in the editor.
                     <p:watermark for="email" value="Not Null"/>
                     <p:watermark for="job_id" value="Not Null"/>
                 </h:panelGrid>
+                <br/>
+                <br/>
                 <p:commandButton value="insert"  
                                  update=":notification, :employeesForm, @form"
                                  oncomplete="PF('insertWidgetDialog').hide()"
