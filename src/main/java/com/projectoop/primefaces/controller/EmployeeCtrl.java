@@ -75,6 +75,7 @@ public class EmployeeCtrl implements Serializable {
         notifyMessageInsert(emp);
         onClear();
         onSearch();
+        employee = null;
 
     }
 

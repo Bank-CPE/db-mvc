@@ -24,7 +24,7 @@ and open the template in the editor.
             <p:inputText id="query" value="#{employeeCtrl.query}"/>
             <p:watermark for="query" value="search..."/>
 
-            <p:selectOneMenu value="#{employeeCtrl.searchBy}">
+            <p:selectOneMenu value="#{employeeCtrl.searchBy}" style="width: 116px">
                 <f:selectItem itemValue="name" itemLabel="Name"/>
                 <f:selectItem itemValue="email" itemLabel="Email"/>
                 <f:selectItem itemValue="phone" itemLabel="Phone"/>
@@ -63,7 +63,7 @@ and open the template in the editor.
                     #{item.phoneNumber}
                 </p:column>
                 <p:column headerText="Salary">
-                    #{item.salary}
+                    $#{item.salary}
                 </p:column>
                 <p:column headerText="#">
                     <p:commandLink value="show"
@@ -96,7 +96,7 @@ and open the template in the editor.
                   resizable="false"
                   widgetVar="showWidgetDialog">
             <p:outputPanel id="showDialogPanel">
-                <h:panelGrid columns="2">
+                <h:panelGrid columns="2" >
                     <h:outputText value="Employee ID"/>
                     <h:outputText value="#{employeeCtrl.employee.id}"/>
 
@@ -119,7 +119,7 @@ and open the template in the editor.
                     <h:outputText value="#{employeeCtrl.employee.jobId}"/>
 
                     <h:outputText value="Salary"/>
-                    <h:outputText value="#{employeeCtrl.employee.salary}"/>
+                    <h:outputText value="$#{employeeCtrl.employee.salary}"/>
 
                     <h:outputText value="Commission PCT"/>
                     <h:outputText value="#{employeeCtrl.employee.commissionPct}"/>
@@ -139,7 +139,11 @@ and open the template in the editor.
                   resizable="false"
                   widgetVar="deleteWidgetDialog">
             <h:form id="deleteDialogForm"> 
-                #{employeeCtrl.employee.firstName} #{employeeCtrl.employee.lastName}
+                Employee ID <p:spacer width="1"/> : <p:spacer width="5"/> #{employeeCtrl.employee.id}
+                <br/>
+                First Name <p:spacer width="16"/> : <p:spacer width="5"/>#{employeeCtrl.employee.firstName}
+                <br/>
+                Last Name  <p:spacer width="17"/> : <p:spacer width="5"/>#{employeeCtrl.employee.lastName}
                 <br/>
                 <br/>
                 <p:commandButton value="delete"
@@ -200,7 +204,7 @@ and open the template in the editor.
                     <p:watermark for="job_id" value="Not Null"/>
                 </h:panelGrid>
                 <p:commandButton value="insert"  
-                                 update=":notification, :employeesForm"
+                                 update=":notification, :employeesForm, @form"
                                  oncomplete="PF('insertWidgetDialog').hide()"
                                  actionListener="#{employeeCtrl.onInsert()}"/>
                 <p:commandButton value="cancel"
