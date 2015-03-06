@@ -99,7 +99,7 @@ and open the template in the editor.
                   resizable="false"
                   widgetVar="showWidgetDialog">
             <p:outputPanel id="showDialogPanel">
-                <h:panelGrid columns="2" >
+                <h:panelGrid columns="2"  >
                     <h:outputText value="Employee ID"/>
                     <h:outputText value="#{employeeCtrl.employee.id}"/>
 
@@ -185,7 +185,7 @@ and open the template in the editor.
                                  update=":notification, :employeesForm"
                                  oncomplete="PF('updateWidgetDialog').hide()"
                                  actionListener="#{employeeCtrl.onUpdate()}"
-                                 styleClass="blue-buuton"/>
+                                 styleClass="blue-button"/>
                 <p:commandButton value="cancel"
                                  type="button"
                                  onclick="PF('insertWidgetDialog').hide()"
@@ -217,10 +217,13 @@ and open the template in the editor.
                 <p:commandButton value="insert"  
                                  update=":notification, :employeesForm, @form"
                                  oncomplete="PF('insertWidgetDialog').hide()"
-                                 actionListener="#{employeeCtrl.onInsert()}"/>
+                                 actionListener="#{employeeCtrl.onInsert()}"
+                                 styleClass="blue-button"/>
+                                 
                 <p:commandButton value="cancel"
                                  type="button"
-                                 onclick="PF('insertWidgetDialog').hide()"/>
+                                 onclick="PF('insertWidgetDialog').hide()"
+                                 styleClass="white-button"/>
             </h:form>
         </p:dialog>
     </h:body>
