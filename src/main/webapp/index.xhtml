@@ -31,7 +31,7 @@ and open the template in the editor.
                 <f:selectItem itemValue="salary" itemLabel="Salary"/>
             </p:selectOneMenu>
             <p:commandButton value="search"
-                             styleClass="green-button"
+                             styleClass="blue-button"
                              actionListener="#{employeeCtrl.onSearch()}"
                              update="@form"/>
             <p:commandButton value="clear"
@@ -72,21 +72,24 @@ and open the template in the editor.
                     <p:commandLink value="show"
                                    update=":showDialogPanel"
                                    oncomplete="PF('showWidgetDialog').show()"
-                                   actionListener="#{employeeCtrl.onSelect()}">
+                                   actionListener="#{employeeCtrl.onSelect()}"
+                                   style="color: #0F88E7">
                         <f:param name="employeeId" value="#{item.id}"/>
                     </p:commandLink>
                     <p:spacer width="5"/>
                     <p:commandLink value="update"
                                    update=":updateDialogForm"
                                    onclick="PF('updateWidgetDialog').show()"
-                                   actionListener="#{employeeCtrl.onSelect()}">
+                                   actionListener="#{employeeCtrl.onSelect()}"
+                                   style="color: #0F88E7">
                         <f:param name="employeeId" value="#{item.id}"/>
                     </p:commandLink>
                     <p:spacer width="5" />
                     <p:commandLink value="delete"
                                    update=":deleteDialogForm"
                                    oncomplete="PF('deleteWidgetDialog').show()"
-                                   actionListener="#{employeeCtrl.onSelect()}">
+                                   actionListener="#{employeeCtrl.onSelect()}"
+                                   style="color: #0F88E7">
                         <f:param name="employeeId" value="#{item.id}"/>
                     </p:commandLink>
                 </p:column>
