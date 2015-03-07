@@ -28,9 +28,11 @@ public class InsertService {
     }
 
     public void insertRow(Employee employee) throws ClassNotFoundException, SQLException {
-
+        
+        employee.setEmail(employee.getEmail().toUpperCase());
+        
         Class.forName(DBConfig.getDriver());
-
+        
         Connection connection = null;
 
         try {

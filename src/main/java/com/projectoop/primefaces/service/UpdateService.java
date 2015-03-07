@@ -28,8 +28,6 @@ public class UpdateService {
 
     public void updateRow(Employee employee) throws SQLException {
 
-//        System.out.println("Employee_id : " + employee.getId());
-//        System.out.println("First Name : " + employee.getFirstName());
         employee.setEmail(employee.getEmail().toUpperCase());
 
         Connection connection = null;

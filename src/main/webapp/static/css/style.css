@@ -1270,3 +1270,12 @@ body{
     margin-left: 10px;
     margin-right: 10px;
 }
+
+.ui-selectonemenu-panel .ui-selectonemenu-items-wrapper{
+    padding: 0.4em 0;
+}
+
+.ui-selectonemenu-panel.ui-shadow{
+    position: fixed;
+}
+
