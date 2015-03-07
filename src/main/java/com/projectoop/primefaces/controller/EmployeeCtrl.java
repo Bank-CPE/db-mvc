@@ -59,20 +59,11 @@ public class EmployeeCtrl implements Serializable {
     }
 
     public void onInsert() throws ClassNotFoundException, SQLException {
-        Employee emp = new Employee();
-        emp.setId(employees.get(employees.size() - 1).getId());
-        emp.setFirstName(employee.getFirstName());
-        emp.setLastName(employee.getLastName());
-        emp.setEmail(employee.getEmail().toUpperCase());
-        emp.setPhoneNumber(employee.getPhoneNumber());
-        emp.setJobId(employee.getJobId().toUpperCase());
-        emp.setSalary(employee.getSalary());
-        emp.setCommissionPct(employee.getCommissionPct());
-        emp.setManagerId(employee.getManagerId());
-        emp.setDepartmentId(employee.getDepartmentId());
 
-        IntoRow(emp);
-        notifyMessageInsert(emp);
+        employee.setId(employees.get(employees.size() - 1).getId() + 1);
+        
+        IntoRow(employee);
+        notifyMessageInsert(employee);
         onClear();
         onSearch();
         employee = null;
